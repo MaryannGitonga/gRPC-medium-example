@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package runtimePackage;
+
+service RuntimeService {
+    rpc RunPodSandbox (RunPodSandboxRequest) returns (RunPodSandboxResponse);
+
+    rpc StopPodSandbox (StopPodSandboxRequest) returns (StopPodSandboxResponse);
+
+    rpc ListPodSandbox (ListPodSandboxRequest) returns (stream ListPodSandboxResponse);
+}
+
+enum PodStatus {
+    STOPPED = 0;
+    RUNNING = 1;
+}
+
+message PodSandbox {
+    int32 id = 1;
+    string config = 2;
+    PodStatus status = 3;
+}
+
+message RunPodSandboxRequest {
+    string config = 1;
+}
+
+message RunPodSandboxResponse {
+    PodSandbox pod = 1;
+}
+
+message StopPodSandboxRequest {
+    int32 id = 1;
+}
+
+message StopPodSandboxResponse {
+    string message = 1;
+}
+
+message ListPodSandboxRequest {}
+
+message ListPodSandboxResponse {
+    PodSandbox pod = 1;
+}
