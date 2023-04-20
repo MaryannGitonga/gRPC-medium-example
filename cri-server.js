@@ -42,6 +42,8 @@ function RunPodSandbox (call, callback) {
 function StopPodSandbox (call, callback) {
     try {
         const podSandbox = podSandboxes.find(pod => pod.id === call.request.id);
+        if (podSandbox.status === 0)
+            callback(null, {"message": `Pod of id ${call.request.id} is already in stopped state.`})  
         podSandbox.status = PodStatus.type.value[0].name;
         callback(null, {"message": `Pod of id ${call.request.id} is stopped.`})  
     } catch (error) {
