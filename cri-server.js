@@ -8,7 +8,6 @@ const runtimePackage = grpcObject.runtimePackage;
 
 const PodStatus = runtimePackage.PodStatus;
 
-// create a server
 const server = new grpc.Server();
 server.bindAsync("0.0.0.0:40000", grpc.ServerCredentials.createInsecure(), (err, port) => {
     if (err != null) {
